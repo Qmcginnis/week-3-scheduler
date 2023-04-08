@@ -1,7 +1,30 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
-// in the html.
-$(function () {
+// in the html..
+// updates time on the webpage
+function updateTime() {
+  let today = moment();
+
+  // updates the time element in the header
+  $("#currentDay").text(today.format("dddd, MMMM Do YYYY, h:mm.ss"));
+
+  // For coloring the past, present, and future time blocks
+  let now = moment().format("kk");
+  for (let i = 0; i < scheduleElArray.length; i++) {
+      scheduleElArray[i].removeClass("future past present");
+
+      if (now > scheduleElArray[i].data("hour")) {
+          scheduleElArray[i].addClass("past");
+
+      } else if (now === scheduleElArray[i].attr("data-hour")) {
+          scheduleElArray[i].addClass("present");
+
+      } else {
+
+          scheduleElArray[i].addClass("future");
+      }
+  }
+}
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -20,4 +43,4 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-});
+
