@@ -1,6 +1,3 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html..
 // updates time on the webpage
 function updateTime() {
   let today = moment();
@@ -26,6 +23,7 @@ function updateTime() {
   }
 }
 
+// textarea elements
 let saveBttn = $(".save-icon");
 let containerEl = $(".container");
 let schedule9am = $("#9AM");
@@ -38,30 +36,42 @@ let schedule3pm = $("#3PM");
 let schedule4pm = $("#4PM");
 let schedule5pm = $("#5PM");
 
+let scheduleElArray = [
+  schedule9am,
+  schedule10am,
+  schedule11am,
+  schedule12pm,
+  schedule1pm,
+  schedule2pm,
+  schedule3pm,
+  schedule4pm,
+  schedule5pm,
+];
+
 renderLastRegistered();
 updateTime();
 setInterval(updateTime, 1000); 
 
 // render schedule saved in local storage
 function renderLastRegistered() {
-    for (let el of scheduleElArray) {
-        el.val(localStorage.getItem("time block " + el.data("hour")));
+  for (let el of scheduleElArray) {
+      el.val(localStorage.getItem("time block " + el.data("hour")));
 
-    }
+  }
 }
 
 
 // function for handling clicks
 function handleFormSubmit(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    let btnClicked = $(event.currentTarget);
+  let btnClicked = $(event.currentTarget);
 
-    let targetText = btnClicked.siblings("textarea");
- 
-    let targetTimeBlock = targetText.data("hour");
+  let targetText = btnClicked.siblings("textarea");
 
-    localStorage.setItem("time block " +  targetTimeBlock, targetText.val());
+  let targetTimeBlock = targetText.data("hour");
+
+  localStorage.setItem("time block " +  targetTimeBlock, targetText.val());
 }
 
 saveBttn.on("click", handleFormSubmit);
