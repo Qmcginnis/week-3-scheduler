@@ -19,7 +19,7 @@ THEN the saved events persist
 
 ![Alt text](/assets/images/127.0.0.1_5500_index.html%20(2).png "Webpage screenshot")
 
-
+https://qmcginnis.github.io/week-3-scheduler/
 
 
 Copyright (c) [2023] [Quinn McGinnis]
